@@ -1,5 +1,5 @@
 // const API_URL = 'http://localhost:5000/api/flashcards';
-const API_URL = 'https://tuf-task-backend-ltpw.onrender.com';
+const API_URL = 'https://tuf-task-backend-ltpw.onrender.com/api/flashcards';
 
 export const getFlashcards = async () => {
     try {
