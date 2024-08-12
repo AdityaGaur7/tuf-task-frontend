@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { useSpeechSynthesis } from 'react-speech-kit';
 
 function GeminiInReact({ prompt }) {
   const [promptResponses, setPromptResponses] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const genAI = useMemo(() => new GoogleGenerativeAI("AIzaSyB7V2s1arfoGPGwOAbgP9zEwTes-KHI3iY"), []);
-
-  const { speak, speaking, voices } = useSpeechSynthesis(); // Added voices to destructuring
 
   useEffect(() => {
     const fetchResponse = async () => {
@@ -33,15 +30,11 @@ function GeminiInReact({ prompt }) {
   }, [prompt, genAI]);
 
   const handleSpeech = (text) => {
-  
-    const hindiVoice = voices.find(voice => voice.lang === 'hi-IN'); // Find the Hindi voice
-
-    speak({
-      text,
-      voice: hindiVoice,
-      rate: 1.5,   // Speed of the speech
-      pitch: 6,  // Pitch of the speech
-    });
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 1.5;  // Speed of the speech
+    utterance.pitch = 1;   // Pitch of the speech
+    synth.speak(utterance);
   };
 
   return (
@@ -62,10 +55,9 @@ function GeminiInReact({ prompt }) {
               <button
                 className="ml-2 text-blue-500 hover:text-blue-700 border border-black p-4"
                 onClick={() => handleSpeech(response)}
-                disabled={speaking}
                 aria-label="Speak response"
               >
-                speak
+             listen
               </button>
             </div>
           ))}

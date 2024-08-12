@@ -109,7 +109,7 @@ const FlashcardList = () => {
       )}
       {showAIResponse && selectedCardIndex !== null && (
         <div className="mt-4 p-4 border border-gray-800 rounded-lg bg-gray-100">
-          <h3 className="text-lg font-bold mb-2">Explanation:</h3>
+          <h3 className="text-lg font-bold mb-2">AI Explanation:</h3>
           <GeminiInReact prompt={flashcards[selectedCardIndex].question + "answer is " + flashcards[selectedCardIndex].answer + "why?"} />
         </div>
       )}
